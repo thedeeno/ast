@@ -14,8 +14,10 @@
 		private var SpaceBar:Boolean=false;
 		private var _stageWidth:int=stage.stageWidth;
 		private var _stageHeight:int=stage.stageHeight;
+		//public var _stage:Stage;
 
 		public function ast() {
+			//_stage= this.Stage;
 			stage.addChild(_ship);
 			shipControl();
 			trace(_ship.rotation);
@@ -40,7 +42,6 @@
 				DownArrow=true;
 			} else if (event.keyCode == 32) {
 				SpaceBar=true;
-				_ship.fireMissile();
 			}
 		}
 
@@ -63,8 +64,8 @@
 				SpaceBar=false;
 			}
 		}
-		
-		public function tic(e:Event){
+
+		public function tic(e:Event) {
 			//Rotate Ship
 			if (LeftArrow) {
 				_ship.turn(-10);
@@ -78,9 +79,32 @@
 			if (DownArrow) {
 				
 			}
+			if (SpaceBar) {
+				_ship.fireMissile();
+				trace("space bar down");
+			}
 			
+			
+			
+			_ship.tic();
+			wrap();
 		}
-		
+
+		function wrap() {
+			//Object Wraparound
+			if (_ship.x<0) {
+				_ship.x=_stageWidth;
+			} else if (_ship.x > _stageWidth) {
+				_ship.x=0;
+			}
+
+			if (_ship.y<0) {
+				_ship.y=_stageHeight;
+			} else if (_ship.y > _stageHeight) {
+				_ship.y=0;
+			}
+		}
+
 		public function shipControl() {
 			stage.addEventListener(KeyboardEvent.KEY_DOWN, handleKeyPress);
 			stage.addEventListener(KeyboardEvent.KEY_UP, handleKeyRelease);
