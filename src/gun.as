@@ -1,22 +1,23 @@
 ﻿package{
-	import flash.display.MovieClip;
 	import flash.events.Event;
 	import flash.geom.Point;
-	public class gun extends MovieClip{
+	public class gun extends Entity {
 		private var _interval:Number;
-		private var _velocity:Number;
+		private var _speed:Number;
 		//movement pattern
-		private var _angle:Number;
+		public var ang:Number;
 		
-		function gun() {
-			
+		function gun(angle:Number) {
+			_speed = 10;
+			ang = angle; 
 		}
 		
 		function fire(){
-			var newMissile:missile = new missile();
+			var newMissile:missile = new missile(new VelocityVector(ang, _speed));
 			var abs:Point = parent.localToGlobal(new Point(this.x, this.y));
 			newMissile.x= abs.x;
 			newMissile.y=abs.y;
+			
 			stage.addChild(newMissile);
 			trace("FIRE!");
 		}

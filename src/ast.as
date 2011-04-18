@@ -3,6 +3,7 @@
 	import flash.events.MouseEvent;
 	import flash.events.KeyboardEvent;
 	import flash.events.Event;
+	import flash.display.DisplayObject;
 
 	public class ast extends MovieClip {
 		private var _level:level = new level();
@@ -91,17 +92,20 @@
 		}
 
 		function wrap() {
-			//Object Wraparound
-			if (_ship.x<0) {
-				_ship.x=_stageWidth;
-			} else if (_ship.x > _stageWidth) {
-				_ship.x=0;
-			}
-
-			if (_ship.y<0) {
-				_ship.y=_stageHeight;
-			} else if (_ship.y > _stageHeight) {
-				_ship.y=0;
+			trace(stage.numChildren);
+			for(var i:int = 0; i < stage.numChildren; i++) {
+				var c:DisplayObject = stage.getChildAt(i);
+				
+				if (c.x<0) {
+					c.x=_stageWidth;
+				} else if (c.x > _stageWidth) {
+					c.x=0;
+				}
+				if (c.y<0) {
+					c.y=_stageHeight;
+				} else if (c.y > _stageHeight) {
+					c.y=0;
+				}
 			}
 		}
 

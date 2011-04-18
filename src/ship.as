@@ -1,9 +1,8 @@
 ﻿package {
-	import flash.display.MovieClip;
 	import flash.events.MouseEvent;
 	import flash.events.KeyboardEvent;
 	import flash.events.Event;
-	public class ship extends MovieClip {
+	public class ship extends Entity {
 
 		private var _max_velocity:Number;
 		private var _dX:Number;
@@ -20,7 +19,7 @@
 		}
 
 		public function mountGun(X:int, Y:int){
-			var newGun:gun = new gun();
+			var newGun:gun = new gun(this.rotation);
 			_gunArray.push(newGun);
 			addChild(newGun);
 			newGun.x=X;
@@ -30,6 +29,9 @@
 
 		function turn(degrees:int) {
 			this.rotation+=degrees;
+			for each (var g:gun in _gunArray) {
+				g.ang = this.rotation;
+			}
 		}
 
 		function moveShip() {
