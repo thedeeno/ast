@@ -78,24 +78,24 @@
 				_ship.accelerate();
 			}
 			if (DownArrow) {
-				
+
 			}
 			if (SpaceBar) {
 				_ship.fireMissile();
 				trace("space bar down");
 			}
-			
-			
-			
+
+
+
 			_ship.tic();
 			wrap();
 		}
 
 		function wrap() {
 			trace(stage.numChildren);
-			for(var i:int = 0; i < stage.numChildren; i++) {
-				var c:DisplayObject = stage.getChildAt(i);
-				
+			for (var i:int = 0; i < stage.numChildren; i++) {
+				var c:DisplayObject=stage.getChildAt(i);
+
 				if (c.x<0) {
 					c.x=_stageWidth;
 				} else if (c.x > _stageWidth) {
@@ -114,6 +114,5 @@
 			stage.addEventListener(KeyboardEvent.KEY_UP, handleKeyRelease);
 			stage.addEventListener(Event.ENTER_FRAME, tic);
 		}
-
 	}
 }
